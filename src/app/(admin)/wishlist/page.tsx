@@ -1,9 +1,9 @@
-import { BaseLayout } from '@/components/index';
+import { BaseLayout, Header } from '@/components/index';
 
 export default function WishList() {
   return (
     <BaseLayout>
-      <h1>WishList</h1>
+      <Header namePage="Pedidos" />
     </BaseLayout>
   );
 }
