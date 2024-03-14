@@ -1,29 +1,21 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from '../Input/@index';
+import { FiSearch } from 'react-icons/fi';
+import { useValidateForm } from './hooks/useValidateForm';
 
 interface HeaderProps {
   namePage: string;
 }
 
 export const Header = ({ namePage }: HeaderProps) => {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-
-  const handleStartDateChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setStartDate(event.target.value);
-  };
-
-  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEndDate(event.target.value);
-  };
-
-  const handleClick = () => {
-    alert(`Start Date: ${startDate}, End Date: ${endDate}`);
-  };
-
+  const {
+    startDate,
+    endDate,
+    handleStartDateChange,
+    handleEndDateChange,
+    handleClick
+  } = useValidateForm();
   return (
     <div className="w-full h-max flex justify-between px-10 py-20">
       <h1 className="text-2xl font-bold">{namePage}</h1>
@@ -37,8 +29,11 @@ export const Header = ({ namePage }: HeaderProps) => {
           value={endDate}
           handleOnChange={handleEndDateChange}
         />
-        <button className="bg-brow-3 p-2 rounded-lg" onClick={handleClick}>
-          Submit
+        <button
+          className="bg-brow-3 p-2 rounded-lg hover:bg-brow-4"
+          onClick={handleClick}
+        >
+          <FiSearch size={22} color="#fff" />
         </button>
       </form>
     </div>
