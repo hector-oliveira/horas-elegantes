@@ -2,6 +2,7 @@ type Props = {
   value: string;
   handleOnChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
 export const DateCalendar = ({ value, handleOnChange }: Props) => {
   return (
     <input
