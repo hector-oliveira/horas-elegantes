@@ -18,15 +18,17 @@ export default function Cart() {
       <div className="w-full px-4">
         <Header namePage="Troca e Devoluções" />
         <main className="border border-black overflow-scroll max-h-96">
-          <table className="table-auto w-full border-spacing-y-6 border-separate">
+          <table className="table-auto w-full border-spacing-y-2 border-separate">
             <thead className="w-full">
-              <tr>
-                <TitleHeader titles={headers} />
-              </tr>
+              <TitleHeader titles={headers} />
             </thead>
             <tbody className="w-full">
-              {rowDatas.map((row) => (
-                <TableRow key={row.id} {...row} />
+              {rowDatas.map((row, index) => (
+                <TableRow
+                  key={row.id}
+                  zebraEfect={index % 2 === 0 ? 'bg-gray-200' : ''}
+                  {...row}
+                />
               ))}
             </tbody>
           </table>
