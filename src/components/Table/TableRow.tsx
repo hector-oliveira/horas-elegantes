@@ -5,12 +5,13 @@ type RowDatasProps = {
   dateOfBuy: string;
   address: string;
   status: string;
+  zebraEfect: string;
 };
 
-const cellClassName = 'text-center p-2';
+const cellClassName = 'text-center py-4 px-6';
 
 export const TableRow = (props: RowDatasProps) => (
-  <tr className="h-max w-full bg-gray-200">
+  <tr className={props.zebraEfect}>
     <td className={cellClassName}>{props.wishlist}</td>
     <td className={cellClassName}>{props.value}</td>
     <td className={cellClassName}>{props.client}</td>
