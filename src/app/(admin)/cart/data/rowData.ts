@@ -67,5 +67,75 @@ export const rowDatas = [
     dateOfBuy: '16/01/2019',
     address: 'Rua das luzes, N° 24, MT',
     status: 'Enviado'
+  },
+
+  {
+    id: 8,
+    wishlist: 'ST4AM',
+    value: '115,20',
+    client: 'Dean Winchester',
+    dateOfBuy: '08/02/2020',
+    address: 'Rua das uvas, N° 100, GO',
+    status: 'Em Preparação'
+  },
+
+  {
+    id: 9,
+    wishlist: 'AZ9LR',
+    value: '164,15',
+    client: 'Ana Carla',
+    dateOfBuy: '18/07/2018',
+    address: 'Rua Melância, N° 42, CE',
+    status: 'Enviado'
+  },
+
+  {
+    id: 10,
+    wishlist: 'TR1ZF',
+    value: '202,89',
+    client: 'Patrícia das Dores',
+    dateOfBuy: '16/01/2019',
+    address: 'Rua das Laranjas, N° 21, RR',
+    status: 'Enviado'
+  },
+
+  {
+    id: 11,
+    wishlist: 'HC6LR',
+    value: '364,15',
+    client: 'Josefa Lucia',
+    dateOfBuy: '01/12/2022',
+    address: 'Rua das Peras, N° 54, MT',
+    status: 'Em Preparação'
+  },
+
+  {
+    id: 12,
+    wishlist: 'HG3RD',
+    value: '235,95',
+    client: 'Ana Josefa',
+    dateOfBuy: '16/01/2019',
+    address: 'Rua das luzes, N° 24, MT',
+    status: 'Enviado'
+  },
+
+  {
+    id: 13,
+    wishlist: 'AG6LR',
+    value: '164,15',
+    client: 'Antonio Jorge',
+    dateOfBuy: '16/01/2019',
+    address: 'Rua luz, N° 24, MS',
+    status: 'Enviado'
+  },
+
+  {
+    id: 14,
+    wishlist: 'HG6LR',
+    value: '154,65',
+    client: 'Patricio Nordestino',
+    dateOfBuy: '16/01/2019',
+    address: 'Rua dos Abacates, N° 525, RO',
+    status: 'Enviado'
   }
 ];
