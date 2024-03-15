@@ -4,7 +4,7 @@ type TitleHeaderProps = {
 
 export const TitleHeader = ({ titles }: TitleHeaderProps) => {
   return (
-    <tr>
+    <tr className="shadow-md bg-gray-50">
       {titles.map((title) => (
         <th key={title} className="py-3">
           {title}
