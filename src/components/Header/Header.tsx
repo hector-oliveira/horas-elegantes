@@ -17,7 +17,7 @@ export const Header = ({ namePage }: HeaderProps) => {
     handleClick
   } = useValidateForm();
   return (
-    <div className="w-full h-max flex justify-between px-10 py-20">
+    <div className="w-full h-max flex justify-between px-10 py-12">
       <h1 className="text-2xl font-bold">{namePage}</h1>
       <form className="flex justify-between items-center w-fit gap-6">
         <Input.DateCalendar
