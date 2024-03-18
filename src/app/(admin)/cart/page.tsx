@@ -1,7 +1,6 @@
-import { TitleHeader } from '@/components/Table/TitleHeader';
-import { BaseLayout, Header } from '@/components/index';
-import { rowDatas } from './data/rowData';
-import { TableRow } from '@/components/Table/TableRow';
+'use client';
+import { BaseLayout, Header, Input, Table } from '@/components/index';
+import { useCart } from './utils/hooks/useCart';
 
 const headers = [
   'Pedidos',
@@ -13,25 +12,30 @@ const headers = [
 ];
 
 export default function Cart() {
+  const { filter, setFilter, filteredRowData, getZebraEffect } = useCart();
   return (
     <BaseLayout>
-      <div className="w-full px-4">
+      <div className="w-full px-4 gap-2">
         <Header namePage="Troca e Devoluções" />
-        <main className="border border-black overflow-y-scroll max-h-96 px-2">
-          <table className="table-auto w-full border-spacing-y-2 border-separate">
-            <thead className="w-full sticky top-0">
-              <TitleHeader titles={headers} />
-            </thead>
-            <tbody className="w-full">
-              {rowDatas.map((row, index) => (
-                <TableRow
+        <Input.Search
+          filterValue={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        <main className="overflow-y-scroll max-h-96 px-2 shadow-lg">
+          <Table.Root>
+            <Table.Head>
+              <Table.TitleHeader titles={headers} />
+            </Table.Head>
+            <Table.Body>
+              {filteredRowData.map((row, index) => (
+                <Table.Row
                   key={row.id}
-                  zebraEffect={index % 2 === 0 ? 'bg-gray-200' : ''}
+                  zebraEffect={getZebraEffect(index)}
                   {...row}
                 />
               ))}
-            </tbody>
-          </table>
+            </Table.Body>
+          </Table.Root>
         </main>
       </div>
     </BaseLayout>
