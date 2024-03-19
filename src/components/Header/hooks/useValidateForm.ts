@@ -15,7 +15,11 @@ export const useValidateForm = () => {
   };
 
   const handleClick = () => {
-    alert(`Start Date: ${startDate}, End Date: ${endDate}`);
+    const startDateLocal = new Date(startDate + 'T00:00');
+    const endDateLocal = new Date(endDate + 'T00:00');
+    const formattedStartDate = startDateLocal.toLocaleDateString('pt-BR');
+    const formattedEndDate = endDateLocal.toLocaleDateString('pt-BR');
+    alert(`Start Date: ${formattedStartDate}, End Date: ${formattedEndDate}`);
   };
 
   return {
