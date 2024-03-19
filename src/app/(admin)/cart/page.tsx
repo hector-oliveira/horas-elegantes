@@ -8,7 +8,7 @@ import {
   Table
 } from '@/components/index';
 import { useCart } from './utils/hooks/useCart';
-import { useCallback, useState } from 'react';
+import { useModal } from './utils/hooks/useModal';
 
 const headers = [
   'Pedidos',
@@ -21,30 +21,8 @@ const headers = [
 
 export default function Cart() {
   const { filter, setFilter, filteredRowData, getZebraEffect } = useCart();
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [modalData, setModalData] = useState({
-    orderCodeValue: '',
-    statusValue: '',
-    clientValue: '',
-    addressValue: ''
-  });
-
-  const openModalWithOrderCode = useCallback(
-    (
-      orderCodeValue: string,
-      statusValue: string,
-      clientValue: string,
-      addressValue: string
-    ) => {
-      setModalData({ orderCodeValue, statusValue, clientValue, addressValue });
-      setIsOpenModal(true);
-    },
-    []
-  );
-
-  const closeModal = useCallback(() => {
-    setIsOpenModal(false);
-  }, []);
+  const { closeModal, isOpenModal, modalData, openModalWithOrderCode } =
+    useModal();
 
   return (
     <BaseLayout>

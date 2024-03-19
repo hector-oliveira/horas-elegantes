@@ -28,6 +28,7 @@ export default function WishList() {
             <Table.Body>
               {filteredRowData.map((row, index) => (
                 <Table.Row
+                  openModal={() => {}}
                   key={row.id}
                   zebraEffect={getZebraEffect(index)}
                   {...row}
