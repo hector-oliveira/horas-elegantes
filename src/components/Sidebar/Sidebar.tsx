@@ -1,6 +1,6 @@
+'use client';
 import Link from 'next/link';
 import { sidebarItems } from './data/sidebarItems.data';
-
 export const Sidebar = () => {
   return (
     <div>
