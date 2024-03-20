@@ -4,7 +4,7 @@ type BodyProps = {
 
 export const Root = ({ children }: BodyProps) => {
   return (
-    <table className="table-auto w-full border-spacing-y-2 border-separate">
+    <table className="table-auto w-full border-spacing-y-4 border-separate">
       {children}
     </table>
   );

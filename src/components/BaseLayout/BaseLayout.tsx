@@ -7,7 +7,7 @@ type BaseLayoutProps = {
 
 export const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
-    <div className="flex h-screen bg-neutral-100">
+    <div className="flex h-screen bg-@chinese-white">
       <Sidebar />
       {children}
     </div>

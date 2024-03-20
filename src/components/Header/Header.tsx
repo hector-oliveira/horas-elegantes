@@ -18,13 +18,13 @@ export const Header = ({ namePage }: HeaderProps) => {
   } = useValidateForm();
   return (
     <div className="w-full h-max flex justify-between px-10 py-12">
-      <h1 className="text-2xl font-bold">{namePage}</h1>
+      <h1 className="text-2xl font-bold text-@maastricht-blue">{namePage}</h1>
       <form className="flex justify-between items-center w-fit gap-6">
         <Input.DateCalendar
           value={startDate}
           handleOnChange={handleStartDateChange}
         />
-        <p className="text-gray-400 font-normal text-sm">até</p>
+        <p className="text-gray-900 opacity-85 font-medium text-md">até</p>
         <Input.DateCalendar
           value={endDate}
           handleOnChange={handleEndDateChange}

@@ -11,7 +11,7 @@ export const Search = ({ filterValue, onChange }: SearchProps) => {
         placeholder="Buscar"
         value={filterValue}
         onChange={onChange}
-        className="bg-[#FAFAFA] p-4 rounded-lg shadow-md focus:outline-brow-3 focus:shadow-lg placeholder:text-black w-4/5"
+        className="bg-@ghost-white p-4 rounded-lg text-xl shadow-md focus:outline-@maastricht-blue focus:shadow-lg placeholder:text-black w-4/5"
       />
     </div>
   );

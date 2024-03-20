@@ -11,7 +11,7 @@ export const useCart = () => {
   });
 
   const getZebraEffect = (index: number) =>
-    index % 2 === 0 ? 'bg-gray-200' : '';
+    index % 2 === 0 ? 'bg-@snow-white' : 'bg-@botticelli-blue';
 
   return { filter, setFilter, filteredRowData, getZebraEffect };
 };

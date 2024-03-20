@@ -1,6 +1,7 @@
-'use client';
+import React, { useCallback } from 'react';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { TbEditCircle } from 'react-icons/tb';
+
 type RowDatasProps = {
   orderCode: string;
   value: string;
@@ -14,28 +15,41 @@ type RowDatasProps = {
 
 const cellClassName = 'text-center py-4';
 
-export const Row = (props: RowDatasProps) => {
+export const Row = ({
+  orderCode,
+  value,
+  client,
+  dateOfBuy,
+  address,
+  status,
+  zebraEffect,
+  openModal
+}: RowDatasProps) => {
+  const handleOpenModal = useCallback(() => {
+    openModal(orderCode);
+  }, [orderCode, openModal]);
+
   return (
-    <tr className={props.zebraEffect}>
-      <td className={cellClassName}>{props.orderCode}</td>
-      <td className={cellClassName}>{props.value}</td>
-      <td className={cellClassName}>{props.client}</td>
-      <td className={cellClassName}>{props.dateOfBuy}</td>
-      <td className={cellClassName}>{props.address}</td>
+    <tr className={zebraEffect}>
+      <td className={cellClassName}>{orderCode}</td>
+      <td className={cellClassName}>{value}</td>
+      <td className={cellClassName}>{client}</td>
+      <td className={cellClassName}>{dateOfBuy}</td>
+      <td className={cellClassName}>{address}</td>
       <td className={`${cellClassName} flex justify-between item center gap-2`}>
-        {props.status}
+        {status}
         <section className="flex flex-1 justify-end gap-4 pr-4">
-          <button onClick={() => props.openModal(props.orderCode)}>
+          <button onClick={handleOpenModal}>
             <MdOutlineRemoveRedEye
               size={22}
-              color="#5784E6"
+              color="#2c899a"
               className="cursor-pointer"
             />
           </button>
-          <button onClick={() => props.openModal(props.orderCode)}>
+          <button onClick={handleOpenModal}>
             <TbEditCircle
               size={22}
-              color="#F5C400"
+              color="#8B4E1C"
               className="cursor-pointer"
             />
           </button>

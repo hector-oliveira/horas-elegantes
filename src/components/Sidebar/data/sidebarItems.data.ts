@@ -1,5 +1,4 @@
 import { IoBagHandleOutline, IoCartOutline } from 'react-icons/io5';
-import { LuPieChart } from 'react-icons/lu';
 import { RiHomeSmile2Line } from 'react-icons/ri';
 
 export const sidebarItems = [
@@ -17,10 +16,5 @@ export const sidebarItems = [
     label: 'Wish List',
     icon: IoBagHandleOutline,
     href: '/wishlist'
-  },
-  {
-    label: 'Analytics',
-    icon: LuPieChart,
-    href: '/analytics'
   }
 ];
