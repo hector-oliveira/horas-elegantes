@@ -1,43 +1,21 @@
 'use client';
-import { BaseLayout, Header, Input, Table } from '@/components/index';
-import { useCart } from '../cart/utils/hooks/useCart';
-const headers = [
-  'Pedidos',
-  'Valor',
-  'Cliente',
-  'Data de Compra',
-  'Endereço de Entrega',
-  'Status'
-];
+import * as C from '@/components/index';
+import * as U from '../cart/utils/index';
 
 export default function WishList() {
-  const { filter, setFilter, filteredRowData, getZebraEffect } = useCart();
+  const { filter, setFilter } = U.useCart();
   return (
-    <BaseLayout>
+    <C.BaseLayout>
       <div className="w-full px-4 gap-2">
-        <Header namePage="Pedidos" />
-        <Input.Search
+        <C.Header namePage="Pedidos" />
+        <C.Input.Search
           filterValue={filter}
           onChange={(e) => setFilter(e.target.value)}
         />
         <main className="overflow-y-scroll max-h-96 px-2 shadow-lg">
-          <Table.Root>
-            <Table.Head>
-              <Table.TitleHeader titles={headers} />
-            </Table.Head>
-            <Table.Body>
-              {filteredRowData.map((row, index) => (
-                <Table.Row
-                  openModal={() => {}}
-                  key={row.id}
-                  zebraEffect={getZebraEffect(index)}
-                  {...row}
-                />
-              ))}
-            </Table.Body>
-          </Table.Root>
+          <C.Table hederData={U.HeaderData} bodyData={U.RowDatas} />
         </main>
       </div>
-    </BaseLayout>
+    </C.BaseLayout>
   );
 }
