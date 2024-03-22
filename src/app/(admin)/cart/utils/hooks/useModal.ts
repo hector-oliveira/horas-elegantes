@@ -1,68 +1,48 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
+import { BodyDataProps } from '@/components/Table/Table';
 
-export const useModal = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
-  const [modalData, setModalData] = useState({
-    orderCodeValue: '',
-    statusValue: '',
-    clientValue: '',
-    addressValue: ''
-  });
-  const [editModalData, setEditModalData] = useState({
-    orderCodeValue: '',
-    clientValue: '',
-    addressValue: '',
-    initialStatusValue: ''
+export function useModal() {
+  const [isViewModalVisible, setIsViewModalVisible] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [currentOrder, setCurrentOrder] = useState({
+    orderCode: '',
+    client: '',
+    address: '',
+    status: ''
   });
 
-  const openModalWithEdit = useCallback(
-    (
-      orderCodeValue: string,
-      clientValue: string,
-      addressValue: string,
-      initialStatusValue: string
-    ) => {
-      setEditModalData({
-        orderCodeValue,
-        clientValue,
-        addressValue,
-        initialStatusValue
-      });
-      setIsOpenEditModal(true);
-    },
-    []
-  );
+  const setCurrentOrderDetails = (item: BodyDataProps) => {
+    setCurrentOrder({
+      orderCode: item.orderCode,
+      client: item.client,
+      address: item.address,
+      status: item.status
+    });
+  };
 
-  const openModalWithOrderCode = useCallback(
-    (
-      orderCodeValue: string,
-      statusValue: string,
-      clientValue: string,
-      addressValue: string
-    ) => {
-      setModalData({ orderCodeValue, statusValue, clientValue, addressValue });
-      setIsOpenModal(true);
-    },
-    []
-  );
+  const handleOpenViewModal = (item: BodyDataProps) => {
+    setCurrentOrderDetails(item);
+    setIsViewModalVisible(true);
+  };
+  const handleCloseViewModal = () => {
+    setIsViewModalVisible(false);
+  };
 
-  const closeEditModal = useCallback(() => {
-    setIsOpenEditModal(false);
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setIsOpenModal(false);
-  }, []);
+  const handleOpenEditModal = (item: BodyDataProps) => {
+    setCurrentOrderDetails(item);
+    setIsEditModalVisible(true);
+  };
+  const handleCloseEditModal = () => {
+    setIsEditModalVisible(false);
+  };
 
   return {
-    isOpenModal,
-    isOpenEditModal,
-    editModalData,
-    openModalWithEdit,
-    openModalWithOrderCode,
-    closeEditModal,
-    closeModal,
-    modalData
+    isViewModalVisible,
+    isEditModalVisible,
+    currentOrder,
+    handleOpenViewModal,
+    handleCloseViewModal,
+    handleOpenEditModal,
+    handleCloseEditModal
   };
-};
+}
