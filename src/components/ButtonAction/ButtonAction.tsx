@@ -1,7 +1,9 @@
+import { ButtonHTMLAttributes } from 'react';
+
 type ButtonActionProps = {
   children: React.ReactNode;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const ButtonAction = ({ children }: ButtonActionProps) => {
-  return <button>{children}</button>;
+export const ButtonAction = ({ children, ...rest }: ButtonActionProps) => {
+  return <button {...rest}>{children}</button>;
 };
