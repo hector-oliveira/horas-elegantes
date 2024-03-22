@@ -3,6 +3,7 @@ import { IoEyeOutline } from 'react-icons/io5';
 import { TbEditCircle } from 'react-icons/tb';
 
 export type BodyDataProps = {
+  id: number;
   orderCode: string;
   value: string;
   client: string;
@@ -14,8 +15,8 @@ export type BodyDataProps = {
 type TableProps = {
   hederData: string[];
   bodyData: BodyDataProps[];
-  openViewModal?: (orderCode: BodyDataProps) => void;
-  openEditModal?: (orderCode: BodyDataProps) => void;
+  openViewModal?: (item: BodyDataProps) => void;
+  openEditModal?: (item: BodyDataProps) => void;
 };
 
 const cellClassName = 'text-center p-3';
@@ -26,17 +27,18 @@ export const Table = ({
   openViewModal,
   openEditModal
 }: TableProps) => {
-  const handleViewModal = (orderCode: BodyDataProps) => {
+  const handleViewModal = (item: BodyDataProps) => {
     if (openViewModal) {
-      openViewModal(orderCode);
+      openViewModal(item);
     }
   };
 
-  const handleEditModal = (orderCode: BodyDataProps) => {
+  const handleEditModal = (item: BodyDataProps) => {
     if (openEditModal) {
-      openEditModal(orderCode);
+      openEditModal(item);
     }
   };
+
   return (
     <table className="table-auto w-full border-spacing-y-4 border-separate">
       <thead className="w-full sticky top-0 bg-gray-300 shadow-lg">
