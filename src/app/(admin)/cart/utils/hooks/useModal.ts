@@ -1,18 +1,27 @@
 import { useState } from 'react';
-import { BodyDataProps } from '@/components/Table/Table';
+// import { BodyDataProps } from '@/components/Table/Table';
+import { OrderProps } from '../components/OrderDetails';
 
 export function useModal() {
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [currentOrder, setCurrentOrder] = useState({
+  const [viewOrder, setViewOrder] = useState({
     orderCode: '',
     client: '',
     address: '',
     status: ''
   });
 
-  const setCurrentOrderDetails = (item: BodyDataProps) => {
-    setCurrentOrder({
+  const [editOrder, setEditOrder] = useState({
+    orderCode: '',
+    client: '',
+    address: '',
+    status: '',
+    newStatus: ''
+  });
+
+  const setViewOrderDetails = (item: OrderProps) => {
+    setViewOrder({
       orderCode: item.orderCode,
       client: item.client,
       address: item.address,
@@ -20,16 +29,26 @@ export function useModal() {
     });
   };
 
-  const handleOpenViewModal = (item: BodyDataProps) => {
-    setCurrentOrderDetails(item);
+  const setEditOrderDetails = (item: OrderProps) => {
+    setEditOrder({
+      orderCode: item.orderCode,
+      client: item.client,
+      address: item.address,
+      status: item.status,
+      newStatus: item.status
+    });
+  };
+
+  const handleOpenViewModal = (item: OrderProps) => {
+    setViewOrderDetails(item);
     setIsViewModalVisible(true);
   };
   const handleCloseViewModal = () => {
     setIsViewModalVisible(false);
   };
 
-  const handleOpenEditModal = (item: BodyDataProps) => {
-    setCurrentOrderDetails(item);
+  const handleOpenEditModal = (item: OrderProps) => {
+    setEditOrderDetails(item);
     setIsEditModalVisible(true);
   };
   const handleCloseEditModal = () => {
@@ -39,7 +58,8 @@ export function useModal() {
   return {
     isViewModalVisible,
     isEditModalVisible,
-    currentOrder,
+    viewOrder,
+    editOrder,
     handleOpenViewModal,
     handleCloseViewModal,
     handleOpenEditModal,
