@@ -1,4 +1,4 @@
-export const rowDatas = [
+export const RowDatas = [
   {
     id: 1,
     orderCode: 'FE3AB',
