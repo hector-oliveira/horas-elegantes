@@ -1,10 +1,10 @@
-import { rowDatas } from '../data/rowData';
+import { RowDatas } from '../data/rowData';
 import { useState } from 'react';
 
 export const useCart = () => {
   const [filter, setFilter] = useState('');
 
-  const filteredRowData = rowDatas.filter((row) => {
+  const filteredRowData = RowDatas.filter((row) => {
     return Object.values(row).some((value) =>
       value.toString().toLowerCase().includes(filter.toLowerCase())
     );
