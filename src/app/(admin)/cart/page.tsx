@@ -28,9 +28,6 @@ export default function Cart() {
 
   const handleUpdate = () => {
     setStatus({ newStatus: '', isUpdated: true });
-    console.log(
-      `Cliente: ${editOrder.client} ${'\n'} Endereço: ${editOrder.address} ${'\n'} Status: ${editOrder.status} ${'\n'} Novo Status: ${status.newStatus}`
-    );
     editModalHandlers.close();
   };
 

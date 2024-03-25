@@ -30,6 +30,10 @@
 		"react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
 		"react/prop-types": "off",
-		"react/react-in-jsx-scope": "off"
+		"react/react-in-jsx-scope": "off",
+		"linebreak-style": 0,
+    "prettier/prettier": ["error", {
+      "endOfLine": "auto"
+    }]
 	}
 }
