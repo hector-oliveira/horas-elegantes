@@ -50,11 +50,22 @@ export default function Cart() {
           {isViewModalVisible && (
             <Components.ViewModal closeModal={viewModalHandlers.close}>
               <div>
-                <h1>Modal Visualização</h1>
-                <p>Pedido: {viewOrder.orderCode}</p>
-                <p>Cliente: {viewOrder.client}</p>
-                <p>Endereço: {viewOrder.address}</p>
-                <p>Status: {viewOrder.status}</p>
+                <h2 className="text-brow-4 font-bold text-xl">Pedido</h2>
+                <p className="text-brow-3 font-normal text-md mb-6">
+                  {viewOrder.orderCode}
+                </p>
+                <h2 className="text-brow-4 font-bold text-xl">Cliente</h2>
+                <p className="text-brow-3 font-normal text-md mb-6">
+                  {viewOrder.client}
+                </p>
+                <h2 className="text-brow-4 font-bold text-xl">Endereço</h2>
+                <p className="text-brow-3 font-normal text-md mb-6">
+                  {viewOrder.address}
+                </p>
+                <h2 className="text-brow-4 font-bold text-xl">Status</h2>
+                <p className="text-brow-3 font-normal text-md mb-6">
+                  {viewOrder.status}
+                </p>
               </div>
             </Components.ViewModal>
           )}
