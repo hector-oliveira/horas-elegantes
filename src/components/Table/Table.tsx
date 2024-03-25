@@ -39,6 +39,9 @@ export const Table = ({
     }
   };
 
+  const getZebraEffect = (index: number) =>
+    index % 2 === 0 ? 'bg-@snow-white' : 'bg-@botticelli-blue';
+
   return (
     <table className="table-auto w-full border-spacing-y-4 border-separate">
       <thead className="w-full sticky top-0 bg-gray-300 shadow-lg">
@@ -52,7 +55,7 @@ export const Table = ({
       </thead>
       <tbody className="w-full">
         {bodyData.map((item, index) => (
-          <tr key={index}>
+          <tr key={index} className={getZebraEffect(index)}>
             <td className={cellClassName}>{item.orderCode}</td>
             <td className={cellClassName}>{item.value}</td>
             <td className={cellClassName}>{item.client}</td>
