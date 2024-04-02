@@ -1,4 +1,4 @@
-import { BaseLayout, Header } from '@/components/index';
+import { BaseLayout, Header } from '@/components';
 
 export default function Home() {
   return (

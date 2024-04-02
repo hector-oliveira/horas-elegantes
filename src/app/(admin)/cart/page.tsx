@@ -1,10 +1,13 @@
 'use client';
-import React, { useState } from 'react';
-import * as Components from '@/components/index';
-import * as Utils from './utils/index';
+import * as Components from '@/components';
+import { useCart } from './hooks/useCart';
+import { useModal } from './hooks/useModal';
+import { useStatus } from './hooks/useStatus';
+import { RowDatas } from './data/rowData';
+import { HeaderData } from './data/headerData';
 
 export default function Cart() {
-  const { filter, setFilter } = Utils.useCart();
+  const { filter, setFilter } = useCart();
   const {
     isViewModalVisible,
     isEditModalVisible,
@@ -12,24 +15,11 @@ export default function Cart() {
     viewOrder,
     editModalHandlers,
     viewModalHandlers
-  } = Utils.useModal();
+  } = useModal();
+  const { status, setStatus, handleStatusChange, handleUpdate } = useStatus();
 
-  const rowData = Utils.RowDatas;
-  const headerData = Utils.HeaderData;
-
-  const [status, setStatus] = useState({
-    newStatus: '',
-    isUpdated: false
-  });
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setStatus({ ...status, newStatus: e.target.value });
-  };
-
-  const handleUpdate = () => {
-    setStatus({ newStatus: '', isUpdated: true });
-    editModalHandlers.close();
-  };
+  const rowData = RowDatas;
+  const headerData = HeaderData;
 
   return (
     <Components.BaseLayout>
@@ -46,67 +36,25 @@ export default function Cart() {
             openViewModal={viewModalHandlers.open}
             openEditModal={editModalHandlers.open}
           />
-
           {isViewModalVisible && (
             <Components.ViewModal closeModal={viewModalHandlers.close}>
-              <div>
-                <h2 className="text-brow-4 font-bold text-xl">Pedido</h2>
-                <p className="text-brow-3 font-normal text-md mb-6">
-                  {viewOrder.orderCode}
-                </p>
-                <h2 className="text-brow-4 font-bold text-xl">Cliente</h2>
-                <p className="text-brow-3 font-normal text-md mb-6">
-                  {viewOrder.client}
-                </p>
-                <h2 className="text-brow-4 font-bold text-xl">Endereço</h2>
-                <p className="text-brow-3 font-normal text-md mb-6">
-                  {viewOrder.address}
-                </p>
-                <h2 className="text-brow-4 font-bold text-xl">Status</h2>
-                <p className="text-brow-3 font-normal text-md mb-6">
-                  {viewOrder.status}
-                </p>
-              </div>
+              <Components.OrderDetails order={viewOrder} />
             </Components.ViewModal>
           )}
           {isEditModalVisible && (
-            <Components.EditModal closeModal={editModalHandlers.close}>
-              <div>
-                <h1>Modal Edição</h1>
-                <p>Pedido: {editOrder.orderCode}</p>
-                <p>Cliente: {editOrder.client}</p>
-                <p>Endereço: {editOrder.address}</p>
-                <p>Status: {editOrder.status}</p>
-                <input
-                  type="text"
-                  placeholder="Novo Status"
-                  value={status.newStatus}
-                  onChange={handleStatusChange}
-                  className="shadow appearance-none border my-4 rounded w-full p-3 text-gray-700 leading-tight text-xl focus:outline-none focus:shadow-outline"
-                />
-                <button
-                  onClick={handleUpdate}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Atualizar
-                </button>
-              </div>
-            </Components.EditModal>
+            <Components.ViewModal closeModal={editModalHandlers.close}>
+              <Components.EditOrder
+                handleStatusChange={handleStatusChange}
+                handleUpdate={handleUpdate}
+                order={editOrder}
+              />
+            </Components.ViewModal>
           )}
           {status.isUpdated && (
-            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center backdrop-blur-sm">
-              <main className="bg-[#F8F8F8] rounded-lg p-8 flex flex-col-reverse justify-between h-1/4">
-                <p className="text-xl text-green-600">
-                  Status atualizado com sucesso!
-                </p>
-                <button
-                  className="bg-red-500 text-white rounded px-4 py-2 w-max self-end cursor-pointer hover:bg-red-600"
-                  onClick={() => setStatus({ ...status, isUpdated: false })}
-                >
-                  Fechar
-                </button>
-              </main>
-            </div>
+            <Components.UpdateStatusModal
+              status={status}
+              setStatus={() => setStatus({ ...status, isUpdated: false })}
+            />
           )}
         </main>
       </div>

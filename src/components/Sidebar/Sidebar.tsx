@@ -10,7 +10,10 @@ export const Sidebar = () => {
             <li key={item.label}>
               <Link href={item.href}>
                 <div className="flex justify-center">
-                  <item.icon size={32} className="text-@chinese-white" />
+                  <item.icon
+                    size={42}
+                    className="bg-@snow-white p-2 rounded-full cursor-pointer hover:bg-@botticelli-blue"
+                  />
                 </div>
               </Link>
             </li>

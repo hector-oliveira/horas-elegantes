@@ -5,4 +5,6 @@ export { Input } from './Input/@index';
 export { Table } from './Table/Table';
 export { ButtonAction } from './ButtonAction/ButtonAction';
 export { ViewModal } from './Modal/ViewModal';
-export { EditModal } from './Modal/EditModal';
+export { UpdateStatusModal } from './UpdateStatusModal/UpdateStatusModal';
+export { OrderDetails } from './OrderDetails/OrderDetails';
+export { EditOrder } from './EditOrder/EditOrder';
