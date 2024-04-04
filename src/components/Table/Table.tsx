@@ -3,7 +3,6 @@ import { IoEyeOutline } from 'react-icons/io5';
 import { TbEditCircle } from 'react-icons/tb';
 
 export type BodyDataProps = {
-  id: number;
   orderCode: string;
   value: string;
   client: string;
@@ -66,14 +65,20 @@ export const Table = ({
             >
               {item.status}
               <section className="flex w-max item-center gap-3">
-                <ButtonAction onClick={() => handleViewModal(item)}>
+                <ButtonAction
+                  aria-label="Visualizar"
+                  onClick={() => handleViewModal(item)}
+                >
                   <IoEyeOutline
                     size={26}
                     color="#2c899a"
                     className="cursor-pointer"
                   />
                 </ButtonAction>
-                <ButtonAction onClick={() => handleEditModal(item)}>
+                <ButtonAction
+                  aria-label="Editar"
+                  onClick={() => handleEditModal(item)}
+                >
                   <TbEditCircle
                     size={26}
                     color="#9a752c"

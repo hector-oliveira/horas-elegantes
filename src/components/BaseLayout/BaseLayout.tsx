@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Sidebar } from '../Sidebar/Sidebar';
+import { Sidebar } from '@/components';
 
 type BaseLayoutProps = {
   children: ReactNode | ReactNode[];

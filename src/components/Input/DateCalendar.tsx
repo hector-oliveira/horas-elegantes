@@ -10,6 +10,7 @@ export const DateCalendar = ({ value, handleOnChange }: Props) => {
       value={value}
       onChange={handleOnChange}
       className="bg-@ghost-white p-2 rounded-lg cursor-pointer focus:outline-brow-3 focus:shadow-lg"
+      data-testid="date-input"
     />
   );
 };
