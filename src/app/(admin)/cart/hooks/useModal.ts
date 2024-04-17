@@ -1,10 +1,7 @@
+import { BodyDataProps } from '@/components/Table/Table';
 import { useState } from 'react';
 
-type OrderProps = {
-  orderCode: string;
-  client: string;
-  address: string;
-  status: string;
+export type OrderProps = BodyDataProps & {
   newStatus?: string;
 };
 
@@ -12,16 +9,22 @@ export function useModal() {
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [viewOrder, setViewOrder] = useState<OrderProps>({
-    orderCode: '',
-    client: '',
-    address: '',
-    status: ''
+    id: '',
+    cpf: '',
+    name: '',
+    phone: '',
+    birth: '',
+    email: '',
+    active: true
   });
   const [editOrder, setEditOrder] = useState<OrderProps>({
-    orderCode: '',
-    client: '',
-    address: '',
-    status: '',
+    id: '',
+    cpf: '',
+    name: '',
+    phone: '',
+    birth: '',
+    email: '',
+    active: true,
     newStatus: ''
   });
 
@@ -30,7 +33,7 @@ export function useModal() {
 
   // Define a função para atualizar os detalhes do pedido editado
   const setEditOrderDetails = (item: OrderProps) =>
-    setEditOrder({ ...item, newStatus: item.status });
+    setEditOrder({ ...item, newStatus: item.active ? 'devolução' : 'troca' });
 
   // Define as funções para abrir e fechar o modal de visualização
   const viewModalHandlers = {
