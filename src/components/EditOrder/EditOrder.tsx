@@ -1,15 +1,13 @@
-type Order = {
-  orderCode: string;
-  client: string;
-  address: string;
-  status: string;
-};
-
-type EditOrderProps = {
-  order: Order;
+interface OrderDetailsProps {
+  order: {
+    cpf: string;
+    name: string;
+    phone: string;
+    active: boolean;
+  };
   handleUpdate: () => void;
   handleStatusChange: (event: Event) => void;
-};
+}
 
 type Event = React.ChangeEvent<HTMLInputElement>;
 
@@ -17,14 +15,14 @@ export function EditOrder({
   order,
   handleStatusChange,
   handleUpdate
-}: EditOrderProps) {
+}: OrderDetailsProps) {
   return (
     <div>
       <h1>Modal Edição</h1>
-      <p>Pedido: {order.orderCode}</p>
-      <p>Cliente: {order.client}</p>
-      <p>Endereço: {order.address}</p>
-      <p>Status: {order.status}</p>
+      <p>CPF: {order.cpf}</p>
+      <p>Cliente: {order.name}</p>
+      <p>Telefone: {order.phone}</p>
+      <p>Status: {order.active}</p>
       <input
         type="text"
         placeholder="Novo Status"
