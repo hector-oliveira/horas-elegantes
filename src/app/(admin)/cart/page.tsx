@@ -3,8 +3,9 @@ import * as Components from '@/components';
 import { useCart } from './hooks/useCart';
 import { useModal } from './hooks/useModal';
 import { useStatus } from './hooks/useStatus';
-import { RowDatas } from './data/rowData';
 import { HeaderData } from './data/headerData';
+import { useEffect, useState } from 'react';
+import { BodyDataProps } from '@/components/Table/Table';
 
 export default function Cart() {
   const { filter, setFilter } = useCart();
@@ -17,8 +18,14 @@ export default function Cart() {
     viewModalHandlers
   } = useModal();
   const { status, setStatus, handleStatusChange, handleUpdate } = useStatus();
+  const [bodyData, setBodyData] = useState<BodyDataProps[]>([]);
 
-  const rowData = RowDatas;
+  useEffect(() => {
+    fetch('https://beco-back.onrender.com/users/all?isAdmin=admin@master.com')
+      .then((response) => response.json())
+      .then((data) => setBodyData(data));
+  }, []);
+
   const headerData = HeaderData;
 
   return (
@@ -32,7 +39,7 @@ export default function Cart() {
         <main className="overflow-y-scroll max-h-96 px-2 shadow-lg">
           <Components.Table
             hederData={headerData}
-            bodyData={rowData}
+            bodyData={bodyData}
             openViewModal={viewModalHandlers.open}
             openEditModal={editModalHandlers.open}
           />
