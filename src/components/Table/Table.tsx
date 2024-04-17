@@ -1,14 +1,17 @@
+'use client';
+// import { useEffect, useState } from 'react';
 import { ButtonAction } from '../ButtonAction/ButtonAction';
 import { IoEyeOutline } from 'react-icons/io5';
 import { TbEditCircle } from 'react-icons/tb';
 
 export type BodyDataProps = {
-  orderCode: string;
-  value: string;
-  client: string;
-  dateOfBuy: string;
-  address: string;
-  status: string;
+  id: string;
+  cpf: string;
+  name: string;
+  phone: string;
+  birth: string;
+  email: string;
+  active: boolean;
 };
 
 type TableProps = {
@@ -53,42 +56,43 @@ export const Table = ({
         </tr>
       </thead>
       <tbody className="w-full">
-        {bodyData.map((item, index) => (
-          <tr key={index} className={getZebraEffect(index)}>
-            <td className={cellClassName}>{item.orderCode}</td>
-            <td className={cellClassName}>{item.value}</td>
-            <td className={cellClassName}>{item.client}</td>
-            <td className={cellClassName}>{item.dateOfBuy}</td>
-            <td className={cellClassName}>{item.address}</td>
-            <td
-              className={`${cellClassName} flex justify-between items-center`}
-            >
-              {item.status}
-              <section className="flex w-max item-center gap-3">
-                <ButtonAction
-                  aria-label="Visualizar"
-                  onClick={() => handleViewModal(item)}
-                >
-                  <IoEyeOutline
-                    size={26}
-                    color="#2c899a"
-                    className="cursor-pointer"
-                  />
-                </ButtonAction>
-                <ButtonAction
-                  aria-label="Editar"
-                  onClick={() => handleEditModal(item)}
-                >
-                  <TbEditCircle
-                    size={26}
-                    color="#9a752c"
-                    className="cursor-pointer"
-                  />
-                </ButtonAction>
-              </section>
-            </td>
-          </tr>
-        ))}
+        {Array.isArray(bodyData) &&
+          bodyData.map((item, index) => (
+            <tr key={item.id} className={getZebraEffect(index)}>
+              <td className={cellClassName}>{item.cpf}</td>
+              <td className={cellClassName}>{item.name}</td>
+              <td className={cellClassName}>{item.phone}</td>
+              <td className={cellClassName}>{item.birth}</td>
+              <td className={cellClassName}>{item.email}</td>
+              <td
+                className={`${cellClassName} flex justify-between items-center`}
+              >
+                {item.active ? 'Ativo' : 'Inativo'}
+                <section className="flex w-max item-center gap-3">
+                  <ButtonAction
+                    aria-label="Visualizar"
+                    onClick={() => handleViewModal(item)}
+                  >
+                    <IoEyeOutline
+                      size={26}
+                      color="#2c899a"
+                      className="cursor-pointer"
+                    />
+                  </ButtonAction>
+                  <ButtonAction
+                    aria-label="Editar"
+                    onClick={() => handleEditModal(item)}
+                  >
+                    <TbEditCircle
+                      size={26}
+                      color="#9a752c"
+                      className="cursor-pointer"
+                    />
+                  </ButtonAction>
+                </section>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );
