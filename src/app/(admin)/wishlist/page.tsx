@@ -43,8 +43,16 @@ export default function WishList() {
   const [selectedOption, setSelectedOption] = useState<OptionSelect | null>(
     null
   );
+  const [filteredData, setFilteredData] = useState<WhishData[]>([]);
 
-  // Cria instâncias dos modais de visualização e edição
+  useEffect(() => {
+    setFilteredData(
+      whishData.filter((data) =>
+        data.user.name.toLowerCase().includes(filter.toLowerCase())
+      )
+    );
+  }, [filter, whishData]);
+
   const {
     isEditModalVisible,
     isViewModalVisible,
@@ -113,7 +121,7 @@ export default function WishList() {
         <main className="overflow-y-scroll max-h-96 px-2 shadow-lg">
           <TableWhish
             hederData={headerData}
-            bodyData={whishData}
+            bodyData={filteredData}
             openViewModal={viewModalHandlers.open}
             openEditModal={editModalHandlers.open}
           />
@@ -136,7 +144,7 @@ export default function WishList() {
             <p>{editItem.status.name}</p>
             <div className="flex flex-col gap-2">
               <select
-                className="mt-4 border border-black rounded-sm"
+                className="mt-4 border border-black rounded-lg cursor-pointer p-2 border-none bg-@desert-sand focus:outline-none focus:ring-2 focus:ring-brow-3 focus:border-transparent"
                 onChange={(e) => {
                   const selected = options.find(
                     (option) => option.name === e.target.value
@@ -152,7 +160,7 @@ export default function WishList() {
               </select>
 
               <button
-                className="bg-brow-3 p-1 hover:bg-brow-4 hover:text-white"
+                className="bg-brow-3 p-1 hover:bg-brow-4 hover:text-white rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-brow-3 focus:border-transparent"
                 onClick={updateStatus}
               >
                 ATUALIZAR

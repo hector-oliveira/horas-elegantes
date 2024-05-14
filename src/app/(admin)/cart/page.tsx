@@ -2,7 +2,6 @@
 import * as Components from '@/components';
 import { useCart } from './hooks/useCart';
 import { useModal } from './hooks/useModal';
-import { useStatus } from './hooks/useStatus';
 import { HeaderData } from './data/headerData';
 import { useEffect, useState } from 'react';
 import { BodyDataProps } from '@/components/Table/Table';
@@ -11,19 +10,22 @@ type OrderProps = {
   cpf: string;
   name: string;
   email: string;
+  active: boolean;
 };
 export default function Cart() {
   const { filter, setFilter } = useCart();
-  const {
-    isViewModalVisible,
-    isEditModalVisible,
-    editModalHandlers,
-    viewModalHandlers,
-    editItem,
-    viewItem
-  } = useModal<OrderProps>();
-  const { status, setStatus, handleStatusChange, handleUpdate } = useStatus();
+  const { isViewModalVisible, viewModalHandlers, viewItem } =
+    useModal<OrderProps>();
   const [bodyData, setBodyData] = useState<BodyDataProps[]>([]);
+  const [filteredData, setFilteredData] = useState<BodyDataProps[]>([]);
+
+  useEffect(() => {
+    setFilteredData(
+      bodyData.filter((data) =>
+        data.name.toLowerCase().includes(filter.toLowerCase())
+      )
+    );
+  }, [filter, bodyData]);
 
   useEffect(() => {
     fetch('https://beco-back.onrender.com/users/all?isAdmin=admin@master.com')
@@ -44,29 +46,13 @@ export default function Cart() {
         <main className="overflow-y-scroll max-h-96 px-2 shadow-lg">
           <Components.Table
             hederData={headerData}
-            bodyData={bodyData}
+            bodyData={filteredData}
             openViewModal={viewModalHandlers.open}
-            openEditModal={editModalHandlers.open}
           />
           {isViewModalVisible && viewItem !== null && (
             <Components.ViewModal closeModal={viewModalHandlers.close}>
               <Components.OrderDetails order={viewItem} />
             </Components.ViewModal>
-          )}
-          {isEditModalVisible && editItem !== null && (
-            <Components.ViewModal closeModal={editModalHandlers.close}>
-              <Components.EditOrder
-                handleStatusChange={handleStatusChange}
-                handleUpdate={handleUpdate}
-                order={editItem}
-              />
-            </Components.ViewModal>
-          )}
-          {status.isUpdated && (
-            <Components.UpdateStatusModal
-              status={status}
-              setStatus={() => setStatus({ ...status, isUpdated: false })}
-            />
           )}
         </main>
       </div>

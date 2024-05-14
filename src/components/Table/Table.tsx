@@ -1,13 +1,13 @@
 'use client';
 import { ButtonAction } from '../ButtonAction/ButtonAction';
 import { IoEyeOutline } from 'react-icons/io5';
-import { TbEditCircle } from 'react-icons/tb';
 
 export type BodyDataProps = {
   id: string;
   cpf: string;
   name: string;
   email: string;
+  active: boolean;
 };
 
 type TableProps = {
@@ -19,21 +19,10 @@ type TableProps = {
 
 const cellClassName = 'text-center p-3';
 
-export const Table = ({
-  hederData,
-  bodyData,
-  openViewModal,
-  openEditModal
-}: TableProps) => {
+export const Table = ({ hederData, bodyData, openViewModal }: TableProps) => {
   const handleViewModal = (item: BodyDataProps) => {
     if (openViewModal) {
       openViewModal(item);
-    }
-  };
-
-  const handleEditModal = (item: BodyDataProps) => {
-    if (openEditModal) {
-      openEditModal(item);
     }
   };
 
@@ -59,8 +48,9 @@ export const Table = ({
               <td className={cellClassName}>{item.name}</td>
               <td className={cellClassName}>{item.email}</td>
               <td
-                className={`${cellClassName} flex justify-between items-center`}
+                className={`flex justify-center items-center max-h-full gap-3 pt-2`}
               >
+                {item.active ? 'Usuário Ativo' : 'Usuário Inativo'}
                 <section className="flex w-max item-center gap-3">
                   <ButtonAction
                     aria-label="Visualizar"
@@ -69,16 +59,6 @@ export const Table = ({
                     <IoEyeOutline
                       size={26}
                       color="#2c899a"
-                      className="cursor-pointer"
-                    />
-                  </ButtonAction>
-                  <ButtonAction
-                    aria-label="Editar"
-                    onClick={() => handleEditModal(item)}
-                  >
-                    <TbEditCircle
-                      size={26}
-                      color="#9a752c"
                       className="cursor-pointer"
                     />
                   </ButtonAction>
