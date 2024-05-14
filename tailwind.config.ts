@@ -16,7 +16,8 @@ const config: Config = {
 
         // Main Colors
         '@botticelli-blue': '#BCC8CA',
-        '@maastricht-blue': '#092337',
+        '@maastricht-blue': '#012E40',
+        '@maastricht-blue-light': '#024959',
         '@chinese-white': '#E1E1DA',
         '@ghost-white': '#F8F8F8',
         '@snow-white': '#FFFAFA',
