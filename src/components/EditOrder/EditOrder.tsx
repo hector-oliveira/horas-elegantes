@@ -2,8 +2,7 @@ interface OrderDetailsProps {
   order: {
     cpf: string;
     name: string;
-    phone: string;
-    active: boolean;
+    email: string;
   };
   handleUpdate: () => void;
   handleStatusChange: (event: Event) => void;
@@ -21,8 +20,7 @@ export function EditOrder({
       <h1>Modal Edição</h1>
       <p>CPF: {order.cpf}</p>
       <p>Cliente: {order.name}</p>
-      <p>Telefone: {order.phone}</p>
-      <p>Status: {order.active}</p>
+      <p>E-mail: {order.email}</p>
       <input
         type="text"
         placeholder="Novo Status"

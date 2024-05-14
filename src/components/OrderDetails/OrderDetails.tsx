@@ -3,8 +3,7 @@ interface OrderDetailsProps {
   order: {
     cpf: string;
     name: string;
-    phone: string;
-    active: boolean;
+    email: string;
   };
 }
 
@@ -12,8 +11,7 @@ export const OrderDetails = ({ order }: OrderDetailsProps) => {
   const details = [
     { label: 'CPF', value: order.cpf },
     { label: 'NOME', value: order.name },
-    { label: 'TELEFONE', value: order.phone },
-    { label: 'Status', value: order.active ? 'Ativo' : 'Inativo' }
+    { label: 'E-MAIL', value: order.email }
   ];
 
   return (

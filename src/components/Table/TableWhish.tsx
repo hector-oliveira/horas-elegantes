@@ -1,37 +1,39 @@
 'use client';
+import { Item, Status, User } from '@/app/(admin)/wishlist/page';
 import { ButtonAction } from '../ButtonAction/ButtonAction';
 import { IoEyeOutline } from 'react-icons/io5';
 import { TbEditCircle } from 'react-icons/tb';
 
-export type BodyDataProps = {
+export interface WhishData {
   id: string;
-  cpf: string;
-  name: string;
-  email: string;
-};
+  item: Item[];
+  status: Status;
+  value_total: string;
+  user: User;
+}
 
 type TableProps = {
   hederData: string[];
-  bodyData: BodyDataProps[];
-  openViewModal?: (item: BodyDataProps) => void;
-  openEditModal?: (item: BodyDataProps) => void;
+  bodyData: WhishData[];
+  openViewModal?: (item: WhishData) => void;
+  openEditModal?: (item: WhishData) => void;
 };
 
 const cellClassName = 'text-center p-3';
 
-export const Table = ({
+export const TableWhish = ({
   hederData,
   bodyData,
   openViewModal,
   openEditModal
 }: TableProps) => {
-  const handleViewModal = (item: BodyDataProps) => {
+  const handleViewModal = (item: WhishData) => {
     if (openViewModal) {
       openViewModal(item);
     }
   };
 
-  const handleEditModal = (item: BodyDataProps) => {
+  const handleEditModal = (item: WhishData) => {
     if (openEditModal) {
       openEditModal(item);
     }
@@ -55,13 +57,10 @@ export const Table = ({
         {Array.isArray(bodyData) &&
           bodyData.map((item, index) => (
             <tr key={item.id} className={getZebraEffect(index)}>
-              <td className={cellClassName}>{item.cpf}</td>
-              <td className={cellClassName}>{item.name}</td>
-              <td className={cellClassName}>{item.email}</td>
-              <td
-                className={`${cellClassName} flex justify-between items-center`}
-              >
-                <section className="flex w-max item-center gap-3">
+              <td className={cellClassName}>{item.user.name}</td>
+              <td className={`${cellClassName} flex justify-center`}>
+                {item.status.name}
+                <section className="flex w-max ml-3 item-center gap-3">
                   <ButtonAction
                     aria-label="Visualizar"
                     onClick={() => handleViewModal(item)}
@@ -84,6 +83,9 @@ export const Table = ({
                   </ButtonAction>
                 </section>
               </td>
+              <td
+                className={`${cellClassName} flex justify-between items-center`}
+              ></td>
             </tr>
           ))}
       </tbody>

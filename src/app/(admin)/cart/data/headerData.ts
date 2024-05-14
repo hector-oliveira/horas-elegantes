@@ -1,8 +1,1 @@
-export const HeaderData = [
-  'Pedidos',
-  'Valor',
-  'Cliente',
-  'Data de Compra',
-  'Endereço de Entrega',
-  'Status'
-];
+export const HeaderData = ['CPF', 'Cliente', 'E-mail', 'Status'];

@@ -7,16 +7,21 @@ import { HeaderData } from './data/headerData';
 import { useEffect, useState } from 'react';
 import { BodyDataProps } from '@/components/Table/Table';
 
+type OrderProps = {
+  cpf: string;
+  name: string;
+  email: string;
+};
 export default function Cart() {
   const { filter, setFilter } = useCart();
   const {
     isViewModalVisible,
     isEditModalVisible,
-    editOrder,
-    viewOrder,
     editModalHandlers,
-    viewModalHandlers
-  } = useModal();
+    viewModalHandlers,
+    editItem,
+    viewItem
+  } = useModal<OrderProps>();
   const { status, setStatus, handleStatusChange, handleUpdate } = useStatus();
   const [bodyData, setBodyData] = useState<BodyDataProps[]>([]);
 
@@ -43,17 +48,17 @@ export default function Cart() {
             openViewModal={viewModalHandlers.open}
             openEditModal={editModalHandlers.open}
           />
-          {isViewModalVisible && (
+          {isViewModalVisible && viewItem !== null && (
             <Components.ViewModal closeModal={viewModalHandlers.close}>
-              <Components.OrderDetails order={viewOrder} />
+              <Components.OrderDetails order={viewItem} />
             </Components.ViewModal>
           )}
-          {isEditModalVisible && (
+          {isEditModalVisible && editItem !== null && (
             <Components.ViewModal closeModal={editModalHandlers.close}>
               <Components.EditOrder
                 handleStatusChange={handleStatusChange}
                 handleUpdate={handleUpdate}
-                order={editOrder}
+                order={editItem}
               />
             </Components.ViewModal>
           )}
