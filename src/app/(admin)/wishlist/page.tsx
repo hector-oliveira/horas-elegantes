@@ -34,6 +34,7 @@ type OptionSelect = {
   id: string;
   name: string;
 };
+
 const headerData = ['Usuário', 'Status'];
 export default function WishList() {
   const { filter, setFilter } = useCart();
@@ -48,7 +49,7 @@ export default function WishList() {
   useEffect(() => {
     setFilteredData(
       whishData.filter((data) =>
-        data.user.name.toLowerCase().includes(filter.toLowerCase())
+        data.status.name.toLowerCase().includes(filter.toLowerCase())
       )
     );
   }, [filter, whishData]);
@@ -78,6 +79,30 @@ export default function WishList() {
     fetchOptions();
   }, []);
 
+  const ids = editItem?.item.filter((item) => item.id).map((item) => item.id);
+
+  // const data = {
+  //   order_id: editItem?.id,
+  //   items: ids
+  // };
+
+  const generateCoupons = async () => {
+    try {
+      const response = await axios.post(
+        'https://beco-back.onrender.com/admin/items-receipt',
+        {
+          order_id: editItem?.id,
+          items: ids
+        }
+      );
+
+      console.log(response.data);
+      editModalHandlers.close();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const updateStatus = async () => {
     if (editItem === null || selectedOption === null) {
       console.error('editItem ou selectedOption é null');
@@ -104,6 +129,7 @@ export default function WishList() {
               : item
           )
         );
+        editModalHandlers.close();
       }
     } catch (error) {
       console.error('Erro ao atualizar o status:', error);
@@ -158,6 +184,16 @@ export default function WishList() {
                   </option>
                 ))}
               </select>
+
+              {ids?.length > 0 &&
+                editItem.status.name === 'Itens devolvidos' && (
+                  <button
+                    className="bg-brow-3 p-1 hover:bg-brow-4 hover:text-white rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-brow-3 focus:border-transparent"
+                    onClick={generateCoupons}
+                  >
+                    Gerar Cupons
+                  </button>
+                )}
 
               <button
                 className="bg-brow-3 p-1 hover:bg-brow-4 hover:text-white rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-brow-3 focus:border-transparent"
