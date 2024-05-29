@@ -48,8 +48,10 @@ export default function WishList() {
 
   useEffect(() => {
     setFilteredData(
-      whishData.filter((data) =>
-        data.status.name.toLowerCase().includes(filter.toLowerCase())
+      whishData.filter(
+        (data) =>
+          data.status.name.toLowerCase().includes(filter.toLowerCase()) ||
+          data.user.name.toLowerCase().includes(filter.toLowerCase())
       )
     );
   }, [filter, whishData]);
@@ -80,11 +82,6 @@ export default function WishList() {
   }, []);
 
   const ids = editItem?.item.filter((item) => item.id).map((item) => item.id);
-
-  // const data = {
-  //   order_id: editItem?.id,
-  //   items: ids
-  // };
 
   const generateCoupons = async () => {
     try {
@@ -185,7 +182,8 @@ export default function WishList() {
                 ))}
               </select>
 
-              {ids?.length > 0 &&
+              {ids &&
+                ids.length > 0 &&
                 editItem.status.name === 'Itens devolvidos' && (
                   <button
                     className="bg-brow-3 p-1 hover:bg-brow-4 hover:text-white rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-brow-3 focus:border-transparent"
