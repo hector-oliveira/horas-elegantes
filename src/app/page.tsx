@@ -1,9 +1,10 @@
-import { BaseLayout, Header } from '@/components';
+import { BaseLayout } from '@/components';
+import { Dashboard } from '@/components/Dashboard/dashboard';
 
 export default function Home() {
   return (
     <BaseLayout>
-      <Header namePage="Dashboard" />
+      <Dashboard />
     </BaseLayout>
   );
 }
