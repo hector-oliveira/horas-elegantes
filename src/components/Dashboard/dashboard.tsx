@@ -16,6 +16,7 @@ import {
   Legend,
   BarElement
 } from 'chart.js';
+import { ClipLoader } from 'react-spinners';
 
 ChartJS.register(
   CategoryScale,
@@ -49,10 +50,12 @@ export function Dashboard() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [salesData, setSalesData] = useState<SalesData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Passo 3: Função para buscar dados da API
   async function fetchData() {
     if (startDate && endDate) {
+      setIsLoading(true);
       const response = await fetch(
         `https://beco-back.onrender.com/dashboard/ranking-sales?startDate=${startDate}&endDate=${endDate}`
       );
@@ -67,6 +70,7 @@ export function Dashboard() {
         }))
       };
       setSalesData(formattedData);
+      setIsLoading(false);
     }
   }
 
@@ -113,9 +117,10 @@ export function Dashboard() {
         />
         <button
           onClick={fetchData}
+          disabled={isLoading}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
         >
-          Buscar
+          {isLoading ? <ClipLoader size={20} color="#fff" /> : 'Buscar'}
         </button>
       </div>
       {salesData && (
