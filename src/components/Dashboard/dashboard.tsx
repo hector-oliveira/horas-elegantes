@@ -60,6 +60,15 @@ export function Dashboard() {
         `https://beco-back.onrender.com/dashboard/ranking-sales?startDate=${startDate}&endDate=${endDate}`
       );
       const data = await response.json();
+
+      // Tipando os objetos dentro do array orders antes da ordenação
+      data.orders.sort(
+        (
+          a: { created_at: string; sales: number },
+          b: { created_at: string; sales: number }
+        ) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      );
+
       const formattedData: SalesData = {
         orders: data.orders,
         products: data.products.map((product: ProductFromAPI) => ({
@@ -72,7 +81,7 @@ export function Dashboard() {
       setSalesData(formattedData);
       setIsLoading(false);
     }
-  }
+  } // Esta chave fecha a função fetchData
 
   // Passo 4: Renderizar os gráficos
   const lineChartData = {
