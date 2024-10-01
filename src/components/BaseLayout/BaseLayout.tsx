@@ -5,11 +5,11 @@ type BaseLayoutProps = {
   children: ReactNode | ReactNode[];
 };
 
-export const BaseLayout = ({ children }: BaseLayoutProps) => {
+export const BaseLayout = (props: BaseLayoutProps) => {
   return (
     <div className="flex h-screen bg-@chinese-white">
       <Sidebar />
-      {children}
+      {props.children}
     </div>
   );
 };

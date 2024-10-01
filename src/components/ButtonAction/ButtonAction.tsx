@@ -1,9 +1,10 @@
 import { ButtonHTMLAttributes } from 'react';
-
-type ButtonActionProps = {
+interface ButtonActionProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+}
 
-export const ButtonAction = ({ children, ...rest }: ButtonActionProps) => {
+function ButtonAction({ children, ...rest }: ButtonActionProps) {
   return <button {...rest}>{children}</button>;
-};
+}
+
+export default ButtonAction;
